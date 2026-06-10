@@ -285,34 +285,47 @@ function drawCharlotte(x,y){
 }
 
 function drawPearl(x,y){
-  // Pearl – Finding Nemo: ★ ICONIC baby octopus, flat round disc, one HUGE eye ★
-  // Translucent soft-pink disc body
-  g.globalAlpha=.88;
-  g.fillStyle='#ffcce0';g.beginPath();g.ellipse(x-2,y+6,22,16,0,0,6.28);g.fill();
-  g.globalAlpha=1;
-  // Polka dot texture
-  g.globalAlpha=.25;
-  fC(x-10,y+4,4,'#ff6699');fC(x+6,y+12,3,'#ff6699');fC(x-2,y+2,2,'#ff6699');
-  g.globalAlpha=1;
-  // 8 stubby tentacles
-  g.strokeStyle='#ffb3cc';g.lineWidth=4;g.lineCap='round';
-  var tAngles=[200,225,250,275,300,315,330,350];
-  tAngles.forEach(function(a){
-    var rad=a*Math.PI/180;
+  // Pearl – Finding Nemo: baby flapjack OCTOPUS, flat pink disc, 8 tentacles, mismatched eyes
+  // 8 tentacles hanging below body
+  g.strokeStyle='#ffaac8';g.lineWidth=4.5;g.lineCap='round';
+  var tpos=[-18,-12,-6,0,6,12,18,22];
+  tpos.forEach(function(tx,i){
+    var wobble=Math.sin(i)*6;
     g.beginPath();
-    g.moveTo(x-2+Math.cos(rad)*14,y+6+Math.sin(rad)*10);
-    g.lineTo(x-2+Math.cos(rad)*24,y+6+Math.sin(rad)*18);
+    g.moveTo(x+tx,y+16);
+    g.quadraticCurveTo(x+tx+wobble,y+28,x+tx+wobble*.5,y+36);
     g.stroke();
+    // sucker dots at tip
+    fC(x+tx+wobble*.5,y+36,2.5,'#ff88aa');
   });
-  // ★ ICONIC: one giant eye + one small eye ★
-  // BIG right eye
-  fC(x+6,y+2,10,'#fff');fC(x+6,y+2,8,'#5bc8f5');
-  fC(x+6,y+2,5,'#0d1b2a');
-  fC(x+3,y-1,2.5,'#fff');// sparkle
-  // Small left eye
-  fC(x-8,y+4,5,'#fff');fC(x-8,y+4,3.5,'#5bc8f5');
-  fC(x-8,y+4,2,'#0d1b2a');
-  fC(x-9,y+3,1.2,'#fff');
+  // Flat disc body (flapjack style)
+  g.globalAlpha=.9;
+  g.fillStyle='#ffcce0';g.beginPath();g.ellipse(x,y+6,20,13,0,0,6.28);g.fill();
+  // Lighter centre
+  g.fillStyle='#ffe0ee';g.beginPath();g.ellipse(x+2,y+4,12,8,0,0,6.28);g.fill();
+  g.globalAlpha=1;
+  // Pink body outline
+  g.strokeStyle='#ffaacc';g.lineWidth=1.5;
+  g.beginPath();g.ellipse(x,y+6,20,13,0,0,6.28);g.stroke();
+  // Pink blush spots
+  g.globalAlpha=.3;
+  fC(x-8,y+5,4,'#ff6699');fC(x+10,y+9,3,'#ff6699');
+  g.globalAlpha=1;
+  // ★ ICONIC: one GIANT eye + one tiny eye ★
+  // Giant right eye
+  fC(x+7,y+1,9,'#fff');fC(x+7,y+1,7.5,'#5bc8f5');
+  fC(x+7,y+1,5,'#0d2a3a');fC(x+4,y-2,2.8,'#fff');
+  // Tiny left eye
+  fC(x-9,y+3,4.5,'#fff');fC(x-9,y+3,3.5,'#5bc8f5');
+  fC(x-9,y+3,2,'#0d2a3a');fC(x-10,y+2,1.2,'#fff');
+  // Cute tiny smile
+  g.strokeStyle='#e8709a';g.lineWidth=1.5;
+  g.beginPath();g.arc(x-1,y+11,3.5,.2,Math.PI-.2);g.stroke();
+  // Two little side fins
+  g.fillStyle='rgba(255,180,210,.6)';
+  g.beginPath();g.ellipse(x-20,y+6,7,4,-.5,0,6.28);g.fill();
+  g.beginPath();g.ellipse(x+20,y+6,7,4,.5,0,6.28);g.fill();
+}
   // Tiny smile
   g.strokeStyle='#e8709a';g.lineWidth=1.5;
   g.beginPath();g.arc(x,y+12,4,.15,Math.PI-.15);g.stroke();
@@ -567,45 +580,54 @@ function drawGlinda(x,y){
 }
 
 function drawBlossom(x,y){
-  // Blossom – Powerpuff Girls: ★ giant round head, huge eyes, RED bow, long auburn hair ★
-  // Long auburn hair behind
+  // Blossom – PPG: round head, huge eyes, RED bow, FULL long auburn hair
+  // ── Hair drawn in 3 passes: back bulk, head, front sides ──
+  // Back hair bulk (behind everything)
+  g.fillStyle='#7a2e08';
+  g.beginPath();g.moveTo(x-20,y-18);
+  g.bezierCurveTo(x-28,y+4,x-26,y+40,x-10,y+56);
+  g.lineTo(x+10,y+56);
+  g.bezierCurveTo(x+26,y+40,x+28,y+4,x+20,y-18);
+  g.bezierCurveTo(x+14,y-28,x-14,y-28,x-20,y-18);
+  g.closePath();g.fill();
+  // Hair on top of head (fills the bald spot)
   g.fillStyle='#8b3a10';
-  g.beginPath();g.moveTo(x-18,y+2);
-  g.bezierCurveTo(x-22,y+24,x-20,y+50,x-8,y+56);
-  g.lineTo(x+8,y+56);
-  g.bezierCurveTo(x+20,y+50,x+22,y+24,x+18,y+2);g.closePath();g.fill();
-  // ★ ICONIC: perfectly round PPG head ★
-  g.fillStyle='#fde8c8';g.beginPath();g.arc(x,y+2,23,0,6.28);g.fill();
+  g.beginPath();g.ellipse(x,y-8,20,16,0,0,6.28);g.fill();// big hair volume on top
+  g.beginPath();g.ellipse(x-14,y-4,10,14,.3,0,6.28);g.fill();// left side volume
+  g.beginPath();g.ellipse(x+14,y-4,10,14,-.3,0,6.28);g.fill();// right side volume
+  // ★ ICONIC: giant round PPG head ★
+  g.fillStyle='#fde8c8';g.beginPath();g.arc(x,y+4,22,0,6.28);g.fill();
   // Pink dress body
   g.fillStyle='#ff88cc';
-  g.beginPath();g.moveTo(x-12,y+24);g.lineTo(x-15,y+50);g.lineTo(x+15,y+50);g.lineTo(x+12,y+24);g.closePath();g.fill();
-  // Black belt stripe
-  g.fillStyle='#111';g.fillRect(x-13,y+36,26,5);
-  // White collar
-  g.fillStyle='#fff';g.beginPath();g.moveTo(x-10,y+22);g.lineTo(x-6,y+30);g.lineTo(x+6,y+30);g.lineTo(x+10,y+22);g.closePath();g.fill();
-  // ★ ICONIC: giant oval PPG eyes ★
-  g.fillStyle='#fff';g.beginPath();g.ellipse(x-8,y+4,9,10,0,0,6.28);g.fill();
-  g.fillStyle='#fff';g.beginPath();g.ellipse(x+8,y+4,9,10,0,0,6.28);g.fill();
-  g.fillStyle='#ff66aa';g.beginPath();g.ellipse(x-8,y+4,7,8,0,0,6.28);g.fill();
-  g.fillStyle='#ff66aa';g.beginPath();g.ellipse(x+8,y+4,7,8,0,0,6.28);g.fill();
-  g.fillStyle='#111';g.beginPath();g.ellipse(x-8,y+4,4.5,5.5,0,0,6.28);g.fill();
-  g.fillStyle='#111';g.beginPath();g.ellipse(x+8,y+4,4.5,5.5,0,0,6.28);g.fill();
-  fC(x-5.5,y+1,2.5,'#fff');fC(x+5.5,y+1,2.5,'#fff');// sparkle
-  // PPG line mouth
+  g.beginPath();g.moveTo(x-12,y+25);g.lineTo(x-15,y+52);g.lineTo(x+15,y+52);g.lineTo(x+12,y+25);g.closePath();g.fill();
+  g.fillStyle='#111';g.fillRect(x-13,y+37,26,5);// belt
+  g.fillStyle='#fff';g.beginPath();g.moveTo(x-10,y+23);g.lineTo(x-6,y+31);g.lineTo(x+6,y+31);g.lineTo(x+10,y+23);g.closePath();g.fill();
+  // ★ ICONIC: enormous oval PPG eyes ★
+  g.fillStyle='#fff';g.beginPath();g.ellipse(x-8,y+6,9,10,0,0,6.28);g.fill();
+  g.fillStyle='#fff';g.beginPath();g.ellipse(x+8,y+6,9,10,0,0,6.28);g.fill();
+  g.fillStyle='#ff66aa';g.beginPath();g.ellipse(x-8,y+6,7,8,0,0,6.28);g.fill();
+  g.fillStyle='#ff66aa';g.beginPath();g.ellipse(x+8,y+6,7,8,0,0,6.28);g.fill();
+  g.fillStyle='#111';g.beginPath();g.ellipse(x-8,y+6,4.5,5.5,0,0,6.28);g.fill();
+  g.fillStyle='#111';g.beginPath();g.ellipse(x+8,y+6,4.5,5.5,0,0,6.28);g.fill();
+  fC(x-5.5,y+3,2.5,'#fff');fC(x+5.5,y+3,2.5,'#fff');
+  // Line mouth
   g.strokeStyle='#c07850';g.lineWidth=2;
-  g.beginPath();g.arc(x,y+14,6,.05,Math.PI-.05);g.stroke();
-  // Hair sides visible
+  g.beginPath();g.arc(x,y+16,6,.05,Math.PI-.05);g.stroke();
+  // Front hair sides (over face edges, keeps her from looking bald)
   g.fillStyle='#8b3a10';
-  g.beginPath();g.ellipse(x-22,y+6,5,12,.2,0,6.28);g.fill();
-  g.beginPath();g.ellipse(x+22,y+6,5,12,-.2,0,6.28);g.fill();
-  // ★ ICONIC: RED bow headband ★
+  g.beginPath();g.ellipse(x-22,y+4,6,14,.15,0,6.28);g.fill();
+  g.beginPath();g.ellipse(x+22,y+4,6,14,-.15,0,6.28);g.fill();
+  // Hair parting line at crown
+  g.strokeStyle='#6a2808';g.lineWidth=1.5;
+  g.beginPath();g.moveTo(x,y-22);g.lineTo(x,y-10);g.stroke();
+  // ★ ICONIC: RED bow headband at crown ★
   g.fillStyle='#cc0011';
-  g.beginPath();g.moveTo(x-2,y-20);g.bezierCurveTo(x-14,y-30,x-18,y-18,x-2,y-20);g.fill();
-  g.beginPath();g.moveTo(x+2,y-20);g.bezierCurveTo(x+14,y-30,x+18,y-18,x+2,y-20);g.fill();
-  fC(x,y-20,4.5,'#ee1122');// bow knot
-  fC(x,y-20,2,'#fff');// heart detail
+  g.beginPath();g.moveTo(x-2,y-18);g.bezierCurveTo(x-16,y-30,x-20,y-16,x-2,y-18);g.fill();
+  g.beginPath();g.moveTo(x+2,y-18);g.bezierCurveTo(x+16,y-30,x+20,y-16,x+2,y-18);g.fill();
+  fC(x,y-18,4.5,'#ee1122');
+  fC(x,y-18,2,'#fff');
   // Arms
-  fC(x-18,y+30,5,'#fde8c8');fC(x+18,y+30,5,'#fde8c8');
+  fC(x-18,y+32,5,'#fde8c8');fC(x+18,y+32,5,'#fde8c8');
 }
 
 // ── CHARACTER SECTIONS ────────────────────────────────────────
