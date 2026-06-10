@@ -126,433 +126,486 @@ function drawBG(){
 
 
 // ── CHARACTER SPRITES ─────────────────────────────────────────
-// Each draws centred at (x,y) in a ~70x80 bounding box
+// Drawn centred at (x,y). Card is 70×72px so keep within ~±32px.
 
 function drawMarie(x,y){
-  // White fluffy kitten — pink three-lobed bow, rosy cheeks, blue eyes, whiskers
-  // Body
-  fC(x,y+26,13,'#fffafa'); fC(x,y+28,10,'#fffafa');
-  // Tail
+  // Marie – Aristocats: pure-white kitten, iconic 3-loop pink bow, blue almond eyes
+  var W2=g.fillStyle; // temp
+  // Fluffy body
+  g.fillStyle='#fffafa';g.beginPath();g.ellipse(x,y+28,11,13,0,0,6.28);g.fill();
+  // Curling tail
   g.strokeStyle='#fffafa';g.lineWidth=5;g.lineCap='round';
-  g.beginPath();g.moveTo(x+10,y+32);g.quadraticCurveTo(x+28,y+30,x+24,y+20);g.stroke();
-  // Head
-  g.fillStyle='#fffafa';g.beginPath();g.ellipse(x,y+2,17,16,0,0,6.28);g.fill();
-  // Inner ears
-  g.fillStyle='#ffd6e8';
-  g.beginPath();g.moveTo(x-14,y-12);g.lineTo(x-8,y-26);g.lineTo(x-2,y-10);g.closePath();g.fill();
-  g.beginPath();g.moveTo(x+14,y-12);g.lineTo(x+8,y-26);g.lineTo(x+2,y-10);g.closePath();g.fill();
-  // Outer ears
-  g.strokeStyle='#fffafa';g.lineWidth=3;
-  g.beginPath();g.moveTo(x-14,y-12);g.lineTo(x-10,y-28);g.lineTo(x-1,y-10);g.stroke();
-  g.beginPath();g.moveTo(x+14,y-12);g.lineTo(x+10,y-28);g.lineTo(x+1,y-10);g.stroke();
-  // Eyes — blue oval
-  fC(x-6,y+1,4.5,'#fff');fC(x+6,y+1,4.5,'#fff');
-  fC(x-6,y+1,3.2,'#6ab4e8');fC(x+6,y+1,3.2,'#6ab4e8');
-  fC(x-6,y+1,1.8,'#222');fC(x+6,y+1,1.8,'#222');
-  fC(x-5,y,1,'#fff');fC(x+5,y,1,'#fff');
-  // Rosy cheeks
-  g.globalAlpha=.35;fC(x-10,y+6,4,'#ffaacc');fC(x+10,y+6,4,'#ffaacc');g.globalAlpha=1;
-  // Nose + mouth
-  fC(x,y+7,2.5,'#f4a0b8');
-  g.strokeStyle='#e88aa0';g.lineWidth=1.2;
-  g.beginPath();g.moveTo(x,y+9);g.lineTo(x-4,y+12);g.stroke();
-  g.beginPath();g.moveTo(x,y+9);g.lineTo(x+4,y+12);g.stroke();
+  g.beginPath();g.moveTo(x+9,y+36);g.bezierCurveTo(x+26,y+34,x+28,y+20,x+16,y+16);g.stroke();
+  // Head – round & fluffy
+  g.fillStyle='#fffafa';g.beginPath();g.ellipse(x,y+4,18,17,0,0,6.28);g.fill();
+  // Pointed ears
+  g.fillStyle='#fffafa';
+  g.beginPath();g.moveTo(x-16,y-8);g.lineTo(x-10,y-26);g.lineTo(x-2,y-9);g.closePath();g.fill();
+  g.beginPath();g.moveTo(x+16,y-8);g.lineTo(x+10,y-26);g.lineTo(x+2,y-9);g.closePath();g.fill();
+  g.fillStyle='#ffc0d8';
+  g.beginPath();g.moveTo(x-13,y-9);g.lineTo(x-9,y-22);g.lineTo(x-4,y-10);g.closePath();g.fill();
+  g.beginPath();g.moveTo(x+13,y-9);g.lineTo(x+9,y-22);g.lineTo(x+4,y-10);g.closePath();g.fill();
+  // Face base
+  g.fillStyle='#fffafa';g.beginPath();g.ellipse(x,y+5,16,15,0,0,6.28);g.fill();
+  // Blue almond eyes
+  g.fillStyle='#a8d8f0';g.beginPath();g.ellipse(x-6,y+3,5,4,-.2,0,6.28);g.fill();
+  g.fillStyle='#a8d8f0';g.beginPath();g.ellipse(x+6,y+3,5,4,.2,0,6.28);g.fill();
+  g.fillStyle='#1a3a5c';g.beginPath();g.ellipse(x-6,y+3,3,3.2,0,0,6.28);g.fill();
+  g.fillStyle='#1a3a5c';g.beginPath();g.ellipse(x+6,y+3,3,3.2,0,0,6.28);g.fill();
+  fC(x-4.5,y+1.5,1.2,'#fff');fC(x+4.5,y+1.5,1.2,'#fff');
+  // Pink button nose
+  fC(x,y+9,3,'#f4a0b8');
   // Whiskers
-  g.strokeStyle='rgba(180,160,160,.8)';g.lineWidth=1;
-  [[-8,6,-22,4],[-8,8,-22,9],[8,6,22,4],[8,8,22,9]].forEach(function(w){
-    g.beginPath();g.moveTo(x+w[0],y+w[1]);g.lineTo(x+w[2],y+w[3]);g.stroke();
-  });
-  // THREE-lobed pink bow on top of head
-  g.fillStyle='#ff6eb4';
-  // left lobe
-  g.beginPath();g.moveTo(x-2,y-14);g.bezierCurveTo(x-14,y-22,x-18,y-12,x-2,y-14);g.fill();
-  // right lobe
-  g.beginPath();g.moveTo(x+2,y-14);g.bezierCurveTo(x+14,y-22,x+18,y-12,x+2,y-14);g.fill();
-  // top lobe
-  g.beginPath();g.moveTo(x-2,y-16);g.bezierCurveTo(x-6,y-28,x+6,y-28,x+2,y-16);g.fill();
-  fC(x,y-15,3.5,'#ff9ed2'); // knot
-  // Bow ribbon tails
-  g.strokeStyle='#ff6eb4';g.lineWidth=3;
-  g.beginPath();g.moveTo(x-2,y-14);g.bezierCurveTo(x-10,y-10,x-12,y-4,x-8,y);g.stroke();
-  g.beginPath();g.moveTo(x+2,y-14);g.bezierCurveTo(x+10,y-10,x+12,y-4,x+8,y);g.stroke();
+  g.strokeStyle='rgba(160,140,140,.7)';g.lineWidth=.9;
+  g.beginPath();g.moveTo(x-4,y+9);g.lineTo(x-22,y+6);g.stroke();
+  g.beginPath();g.moveTo(x-4,y+10);g.lineTo(x-22,y+11);g.stroke();
+  g.beginPath();g.moveTo(x+4,y+9);g.lineTo(x+22,y+6);g.stroke();
+  g.beginPath();g.moveTo(x+4,y+10);g.lineTo(x+22,y+11);g.stroke();
+  // Rosy cheeks
+  g.globalAlpha=.28;fC(x-11,y+8,5,'#ffb0cc');fC(x+11,y+8,5,'#ffb0cc');g.globalAlpha=1;
+  // ★ ICONIC: 3-loop pink bow at crown ★
+  g.fillStyle='#ff87b2';
+  // left loop
+  g.beginPath();g.moveTo(x-1,y-14);
+  g.bezierCurveTo(x-12,y-22,x-16,y-12,x-1,y-14);g.closePath();g.fill();
+  // right loop
+  g.beginPath();g.moveTo(x+1,y-14);
+  g.bezierCurveTo(x+12,y-22,x+16,y-12,x+1,y-14);g.closePath();g.fill();
+  // top loop
+  g.beginPath();g.moveTo(x-2,y-15);
+  g.bezierCurveTo(x-5,y-27,x+5,y-27,x+2,y-15);g.closePath();g.fill();
+  fC(x,y-15,4,'#ffb3cc');// knot
+  // ribbon tails
+  g.strokeStyle='#ff87b2';g.lineWidth=2.5;
+  g.beginPath();g.moveTo(x-1,y-14);g.bezierCurveTo(x-8,y-8,x-10,y-2,x-6,y+2);g.stroke();
+  g.beginPath();g.moveTo(x+1,y-14);g.bezierCurveTo(x+8,y-8,x+10,y-2,x+6,y+2);g.stroke();
 }
 
 function drawAngel(x,y){
-  // Pink alien dog from Stitch — long drooping ears, magenta spots, tiny horns, blue eyes
+  // Angel – Stitch: pale-pink alien dog, LONG droopy ears, magenta head-spots, violet eyes, horns
+  // ★ ICONIC: very long floppy ears ★
+  g.fillStyle='#ffb3d9';
+  g.beginPath();g.moveTo(x-7,y-6);
+  g.bezierCurveTo(x-22,y-4,x-26,y+28,x-18,y+38);
+  g.bezierCurveTo(x-14,y+42,x-10,y+34,x-9,y+10);g.closePath();g.fill();
+  g.beginPath();g.moveTo(x+7,y-6);
+  g.bezierCurveTo(x+22,y-4,x+26,y+28,x+18,y+38);
+  g.bezierCurveTo(x+14,y+42,x+10,y+34,x+9,y+10);g.closePath();g.fill();
+  // Inner ear
+  g.fillStyle='#ff88bb';
+  g.beginPath();g.moveTo(x-8,y+2);
+  g.bezierCurveTo(x-18,y+4,x-20,y+26,x-14,y+34);
+  g.bezierCurveTo(x-11,y+38,x-10,y+28,x-10,y+8);g.closePath();g.fill();
+  g.beginPath();g.moveTo(x+8,y+2);
+  g.bezierCurveTo(x+18,y+4,x+20,y+26,x+14,y+34);
+  g.bezierCurveTo(x+11,y+38,x+10,y+28,x+10,y+8);g.closePath();g.fill();
   // Body
-  fC(x,y+26,12,'#ffb3cc');
-  // Long floppy ears
-  g.fillStyle='#ff88aa';
-  g.beginPath();g.moveTo(x-8,y-4);g.bezierCurveTo(x-22,y-2,x-26,y+24,x-16,y+32);
-  g.bezierCurveTo(x-12,y+34,x-8,y+28,x-8,y+8);g.closePath();g.fill();
-  g.beginPath();g.moveTo(x+8,y-4);g.bezierCurveTo(x+22,y-2,x+26,y+24,x+16,y+32);
-  g.bezierCurveTo(x+12,y+34,x+8,y+28,x+8,y+8);g.closePath();g.fill();
-  // Ear inner
-  g.fillStyle='#ffccdd';
-  g.beginPath();g.moveTo(x-9,y+2);g.bezierCurveTo(x-18,y+4,x-20,y+22,x-14,y+28);
-  g.bezierCurveTo(x-11,y+30,x-9,y+22,x-9,y+6);g.closePath();g.fill();
-  g.beginPath();g.moveTo(x+9,y+2);g.bezierCurveTo(x+18,y+4,x+20,y+22,x+14,y+28);
-  g.bezierCurveTo(x+11,y+30,x+9,y+22,x+9,y+6);g.closePath();g.fill();
-  // Head
-  g.fillStyle='#ffb3cc';g.beginPath();g.ellipse(x,y+2,15,14,0,0,6.28);g.fill();
-  // Tiny horns
+  g.fillStyle='#ffb3d9';g.beginPath();g.ellipse(x,y+24,12,13,0,0,6.28);g.fill();
+  // Chest tuft
+  g.fillStyle='#ffcce8';g.beginPath();g.ellipse(x,y+18,7,7,0,0,6.28);g.fill();
+  // Head round
+  g.fillStyle='#ffb3d9';g.beginPath();g.ellipse(x,y+2,15,14,0,0,6.28);g.fill();
+  // Small horns
   g.fillStyle='#cc0066';
-  g.beginPath();g.moveTo(x-5,y-11);g.lineTo(x-8,y-20);g.lineTo(x-2,y-11);g.closePath();g.fill();
-  g.beginPath();g.moveTo(x+5,y-11);g.lineTo(x+8,y-20);g.lineTo(x+2,y-11);g.closePath();g.fill();
-  // Magenta spots on head
-  fC(x-6,y-4,3,'#cc0066');fC(x+6,y-4,3,'#cc0066');fC(x,y-8,2.5,'#cc0066');
-  // Spot on ears
-  fC(x-18,y+12,3,'#cc0066');fC(x+18,y+12,3,'#cc0066');
-  // Eyes — large blue-violet
-  fC(x-5,y+3,4.5,'#fff');fC(x+5,y+3,4.5,'#fff');
-  fC(x-5,y+3,3.2,'#5544cc');fC(x+5,y+3,3.2,'#5544cc');
-  fC(x-5,y+3,1.8,'#111');fC(x+5,y+3,1.8,'#111');
-  fC(x-4,y+2,1,'#fff');fC(x+4,y+2,1,'#fff');
+  g.beginPath();g.moveTo(x-5,y-10);g.lineTo(x-8,y-21);g.lineTo(x-1,y-11);g.closePath();g.fill();
+  g.beginPath();g.moveTo(x+5,y-10);g.lineTo(x+8,y-21);g.lineTo(x+1,y-11);g.closePath();g.fill();
+  // Magenta spots on head (3 spots)
+  fC(x-7,y-5,3.5,'#cc0055');fC(x+7,y-5,3.5,'#cc0055');fC(x,y-9,3,'#cc0055');
+  // Spots on ears
+  fC(x-18,y+14,3,'#cc0055');fC(x+18,y+14,3,'#cc0055');
+  // Violet eyes
+  fC(x-5,y+4,5,'#fff');fC(x+5,y+4,5,'#fff');
+  fC(x-5,y+4,3.8,'#7744cc');fC(x+5,y+4,3.8,'#7744cc');
+  fC(x-5,y+4,2.2,'#110022');fC(x+5,y+4,2.2,'#110022');
+  fC(x-3.5,y+2.5,1.2,'#fff');fC(x+3.5,y+2.5,1.2,'#fff');
   // Snout
-  g.fillStyle='#ffccdd';g.beginPath();g.ellipse(x,y+9,5,3.5,0,0,6.28);g.fill();
+  g.fillStyle='#ffcce8';g.beginPath();g.ellipse(x,y+9,5.5,4,0,0,6.28);g.fill();
   fC(x-2,y+9,1.5,'#cc6688');fC(x+2,y+9,1.5,'#cc6688');
-  // Fluffy chest
-  fC(x,y+20,8,'#ffccdd');
   // Tiny wings
-  g.globalAlpha=.55;g.fillStyle='#ffddee';
-  g.beginPath();g.ellipse(x-14,y+18,10,6,-.4,0,6.28);g.fill();
-  g.beginPath();g.ellipse(x+14,y+18,10,6,.4,0,6.28);g.fill();
+  g.globalAlpha=.5;g.fillStyle='#ffe0f0';
+  g.beginPath();g.ellipse(x-15,y+20,10,6,-.4,0,6.28);g.fill();
+  g.beginPath();g.ellipse(x+15,y+20,10,6,.4,0,6.28);g.fill();
   g.globalAlpha=1;
 }
 
 function drawCharlotte(x,y){
-  // Big pink princess gown, giant blonde ringlets, tiara, pearl necklace, lipstick
-  // Giant poofy gown
-  var gg=g.createRadialGradient(x,y+44,2,x,y+44,32);
-  gg.addColorStop(0,'#ffb3d9');gg.addColorStop(1,'#ff6eb4');
-  g.fillStyle=gg;
-  g.beginPath();g.moveTo(x-8,y+14);g.bezierCurveTo(x-32,y+24,x-38,y+52,x-24,y+58);
-  g.lineTo(x+24,y+58);g.bezierCurveTo(x+38,y+52,x+32,y+24,x+8,y+14);g.closePath();g.fill();
-  // Gown layers/ruffles
-  g.strokeStyle='#ff9ed2';g.lineWidth=2;
-  g.beginPath();g.moveTo(x-30,y+38);g.quadraticCurveTo(x,y+30,x+30,y+38);g.stroke();
-  g.beginPath();g.moveTo(x-36,y+50);g.quadraticCurveTo(x,y+42,x+36,y+50);g.stroke();
-  // Bodice
-  g.fillStyle='#ff88cc';g.fillRect(x-8,y+10,16,14);
+  // Charlotte – Princess & Frog: ★ ICONIC giant pink ball gown ★, big blonde curls, tiara
+  // Giant poofy gown (most of the card)
+  g.fillStyle='#ff8dc8';
+  g.beginPath();g.moveTo(x-7,y+14);
+  g.bezierCurveTo(x-36,y+24,x-42,y+58,x-26,y+64);
+  g.lineTo(x+26,y+64);
+  g.bezierCurveTo(x+42,y+58,x+36,y+24,x+7,y+14);g.closePath();g.fill();
+  // Gown highlight / gradient layer
+  g.fillStyle='#ffb3d9';
+  g.beginPath();g.moveTo(x-7,y+14);
+  g.bezierCurveTo(x-20,y+20,x-22,y+42,x-14,y+56);
+  g.lineTo(x+14,y+56);
+  g.bezierCurveTo(x+22,y+42,x+20,y+20,x+7,y+14);g.closePath();g.fill();
+  // Ruffle lines
+  g.strokeStyle='#ff6eb4';g.lineWidth=1.5;
+  g.beginPath();g.moveTo(x-36,y+40);g.quadraticCurveTo(x,y+32,x+36,y+40);g.stroke();
+  g.beginPath();g.moveTo(x-40,y+52);g.quadraticCurveTo(x,y+44,x+40,y+52);g.stroke();
+  // White corset / bodice
+  g.fillStyle='#fff8f0';g.fillRect(x-7,y+10,14,12);
+  g.strokeStyle='#ffb3d9';g.lineWidth=1;g.strokeRect(x-7,y+10,14,12);
   // Pearl necklace
-  g.strokeStyle='#fffaee';g.lineWidth=2;
-  g.beginPath();g.arc(x,y+14,9,Math.PI*.1,Math.PI*.9);g.stroke();
-  // Skin - arms and face
-  fC(x,y+2,13,'#fde0c0');
-  // Big ringlet hair — multiple golden curls
-  g.fillStyle='#f0c030';
-  [[-14,y-4,8,12,.4],[14,y-4,8,12,-.4],[-18,y+8,6,10,.5],[18,y+8,6,10,-.5],
-   [-10,y-12,7,10,.2],[10,y-12,7,10,-.2]].forEach(function(e2){
-    g.beginPath();g.ellipse(x+e2[0],e2[1],e2[2],e2[3],e2[4],0,6.28);g.fill();
+  for(var pi=0;pi<7;pi++){
+    var pa=Math.PI*(.15+pi*.1);
+    fC(x+Math.cos(pa)*10*1.1,y+12+Math.sin(pa)*10*.5,1.8,'#fffdf0');
+  }
+  // Big blonde ringlet hair
+  g.fillStyle='#f5cb5c';
+  [[x-16,y-2,9,13,.35],[x+16,y-2,9,13,-.35],[x-20,y+10,7,11,.5],[x+20,y+10,7,11,-.5],
+   [x-10,y-12,8,11,.2],[x+10,y-12,8,11,-.2],[x,y-16,10,12,0]].forEach(function(e2){
+    g.beginPath();g.ellipse(e2[0],e2[1],e2[2],e2[3],e2[4],0,6.28);g.fill();
   });
-  // Top of head hair
-  g.fillStyle='#f0c030';g.beginPath();g.ellipse(x,y-8,12,14,0,0,6.28);g.fill();
-  // Face
-  fC(x,y+2,11,'#fde0c0');
+  // Face (peach skin)
+  fC(x,y+2,12,'#fde0c0');
   // Tiara
   g.strokeStyle='#ffd700';g.lineWidth=2.5;
-  g.beginPath();g.moveTo(x-12,y-18);g.lineTo(x-12,y-26);g.lineTo(x-6,y-22);g.lineTo(x,y-30);
-  g.lineTo(x+6,y-22);g.lineTo(x+12,y-26);g.lineTo(x+12,y-18);g.stroke();
-  fC(x,y-30,3,'#ff88cc');fC(x-12,y-26,2,'#88ccff');fC(x+12,y-26,2,'#88ccff');
+  g.beginPath();g.moveTo(x-12,y-19);g.lineTo(x-12,y-28);
+  g.lineTo(x-5,y-23);g.lineTo(x,y-32);g.lineTo(x+5,y-23);
+  g.lineTo(x+12,y-28);g.lineTo(x+12,y-19);g.stroke();
+  fC(x,y-32,3,'#ff88cc');fC(x-12,y-28,2,'#88ccff');fC(x+12,y-28,2,'#88ccff');
   // Eyes + lashes
-  fC(x-4,y+1,3.5,'#fff');fC(x+4,y+1,3.5,'#fff');
-  fC(x-4,y+1,2.5,'#4488cc');fC(x+4,y+1,2.5,'#4488cc');
-  fC(x-4,y+1,1.5,'#111');fC(x+4,y+1,1.5,'#111');
-  // Lashes
+  fC(x-4,y+2,4,'#fff');fC(x+4,y+2,4,'#fff');
+  fC(x-4,y+2,3,'#4488aa');fC(x+4,y+2,3,'#4488aa');
+  fC(x-4,y+2,2,'#111');fC(x+4,y+2,2,'#111');
+  fC(x-3,y+1,1.2,'#fff');fC(x+3,y+1,1.2,'#fff');
   g.strokeStyle='#222';g.lineWidth=1;
-  [[-6,y-2,-8,y-5],[-4,y-3,-4,y-6],[-2,y-2,-1,y-5]].forEach(function(l){
+  [[-6,y-1,-9,y-4],[-4,y-2,-5,y-5],[-2,y-1,-2,y-5]].forEach(function(l){
     g.beginPath();g.moveTo(x+l[0],l[1]);g.lineTo(x+l[2],l[3]);g.stroke();
     g.beginPath();g.moveTo(x-l[0],l[1]);g.lineTo(x-l[2],l[3]);g.stroke();
   });
-  // Pink lips / lipstick
-  g.fillStyle='#ee4488';
-  g.beginPath();g.moveTo(x-4,y+7);g.quadraticCurveTo(x,y+5,x+4,y+7);
-  g.quadraticCurveTo(x,y+11,x-4,y+7);g.closePath();g.fill();
-  g.strokeStyle='#cc2266';g.lineWidth=.8;g.stroke();
+  // Hot pink lips
+  g.fillStyle='#e8275e';
+  g.beginPath();g.moveTo(x-4,y+8);g.quadraticCurveTo(x,y+6,x+4,y+8);
+  g.quadraticCurveTo(x,y+12,x-4,y+8);g.closePath();g.fill();
 }
 
 function drawPearl(x,y){
-  // Baby flapjack octopus — flat pink disc body, ONE huge eye + one small, tentacles
-  // Translucent body disc
-  g.globalAlpha=.85;
-  var bg=g.createRadialGradient(x,y+8,2,x,y+8,20);
-  bg.addColorStop(0,'#ffccdd');bg.addColorStop(1,'#ff99bb');
-  g.fillStyle=bg;g.beginPath();g.ellipse(x,y+8,20,14,0,0,6.28);g.fill();
+  // Pearl – Finding Nemo: ★ ICONIC baby octopus, flat round disc, one HUGE eye ★
+  // Translucent soft-pink disc body
+  g.globalAlpha=.88;
+  g.fillStyle='#ffcce0';g.beginPath();g.ellipse(x-2,y+6,22,16,0,0,6.28);g.fill();
   g.globalAlpha=1;
-  // Spots/texture
-  g.globalAlpha=.3;fC(x-6,y+4,3,'#ff6699');fC(x+4,y+12,2,'#ff6699');g.globalAlpha=1;
-  // LARGE right eye (distinctive uneven eyes from Finding Nemo)
-  fC(x+4,y+4,8,'#fff');fC(x+4,y+4,6,'#44aaee');fC(x+4,y+4,4,'#111');
-  fC(x+2,y+2,2,'#fff');// sparkle
-  // Small left eye
-  fC(x-8,y+6,4,'#fff');fC(x-8,y+6,3,'#44aaee');fC(x-8,y+6,2,'#111');
-  fC(x-9,y+5,1,'#fff');
-  // Tiny mouth line
-  g.strokeStyle='#ee6688';g.lineWidth=1.5;
-  g.beginPath();g.arc(x-2,y+14,3,.1,Math.PI-.1);g.stroke();
-  // Stubby tentacles
-  g.strokeStyle='#ff99bb';g.lineWidth=4;g.lineCap='round';
-  [[-16,y+12,-20,y+22],[-10,y+20,-12,y+30],[0,y+22,0,y+32],
-   [10,y+20,14,y+30],[16,y+12,22,y+22]].forEach(function(t){
-    g.beginPath();g.moveTo(x+t[0],t[1]);g.lineTo(x+t[2],t[3]);g.stroke();
+  // Polka dot texture
+  g.globalAlpha=.25;
+  fC(x-10,y+4,4,'#ff6699');fC(x+6,y+12,3,'#ff6699');fC(x-2,y+2,2,'#ff6699');
+  g.globalAlpha=1;
+  // 8 stubby tentacles
+  g.strokeStyle='#ffb3cc';g.lineWidth=4;g.lineCap='round';
+  var tAngles=[200,225,250,275,300,315,330,350];
+  tAngles.forEach(function(a){
+    var rad=a*Math.PI/180;
+    g.beginPath();
+    g.moveTo(x-2+Math.cos(rad)*14,y+6+Math.sin(rad)*10);
+    g.lineTo(x-2+Math.cos(rad)*24,y+6+Math.sin(rad)*18);
+    g.stroke();
   });
+  // ★ ICONIC: one giant eye + one small eye ★
+  // BIG right eye
+  fC(x+6,y+2,10,'#fff');fC(x+6,y+2,8,'#5bc8f5');
+  fC(x+6,y+2,5,'#0d1b2a');
+  fC(x+3,y-1,2.5,'#fff');// sparkle
+  // Small left eye
+  fC(x-8,y+4,5,'#fff');fC(x-8,y+4,3.5,'#5bc8f5');
+  fC(x-8,y+4,2,'#0d1b2a');
+  fC(x-9,y+3,1.2,'#fff');
+  // Tiny smile
+  g.strokeStyle='#e8709a';g.lineWidth=1.5;
+  g.beginPath();g.arc(x,y+12,4,.15,Math.PI-.15);g.stroke();
 }
 
 function drawPiglet(x,y){
-  // Winnie the Pooh Piglet — pink pig, striped magenta shirt, big ears, round snout
-  // Body — round and roly-poly
-  g.fillStyle='#f7b8d0';g.beginPath();g.ellipse(x,y+24,14,16,0,0,6.28);g.fill();
-  // Striped shirt — magenta/rose stripes
-  g.save();g.beginPath();g.ellipse(x,y+24,14,16,0,0,6.28);g.clip();
-  g.fillStyle='#f7b8d0';g.fillRect(x-14,y+14,28,20);
-  g.fillStyle='#cc5588';
-  for(var si=0;si<4;si++)g.fillRect(x-14,y+14+si*5,28,2.5);
+  // Piglet – Winnie the Pooh: ★ pink pig, striped shirt, floppy ears, round snout ★
+  // Body (round, roly-poly)
+  g.fillStyle='#f2a7c3';g.beginPath();g.ellipse(x,y+26,13,15,0,0,6.28);g.fill();
+  // Striped shirt clipped to body
+  g.save();g.beginPath();g.ellipse(x,y+26,13,15,0,0,6.28);g.clip();
+  g.fillStyle='#f2a7c3';g.fillRect(x-14,y+14,28,24);
+  g.fillStyle='#c46090';// darker stripe
+  for(var si=0;si<5;si++)g.fillRect(x-14,y+15+si*5,28,2.5);
   g.restore();
-  // Head — round
-  g.fillStyle='#f7b8d0';g.beginPath();g.ellipse(x,y,15,14,0,0,6.28);g.fill();
-  // Ears — big floppy pink
-  g.fillStyle='#f7b8d0';
-  g.beginPath();g.ellipse(x-12,y-14,8,10,-.3,0,6.28);g.fill();
-  g.beginPath();g.ellipse(x+12,y-14,8,10,.3,0,6.28);g.fill();
-  g.fillStyle='#ee99bb';
-  g.beginPath();g.ellipse(x-12,y-14,5,7,-.3,0,6.28);g.fill();
-  g.beginPath();g.ellipse(x+12,y-14,5,7,.3,0,6.28);g.fill();
-  // Eyes — large with lashes, blue-green
-  fC(x-5,y-1,4,'#fff');fC(x+5,y-1,4,'#fff');
-  fC(x-5,y-1,3,'#4488aa');fC(x+5,y-1,3,'#4488aa');
-  fC(x-5,y-1,1.8,'#111');fC(x+5,y-1,1.8,'#111');
-  fC(x-4,y-2,1,'#fff');fC(x+4,y-2,1,'#fff');
-  // Round pig snout
-  g.fillStyle='#f4a0c0';g.beginPath();g.ellipse(x,y+6,6,4.5,0,0,6.28);g.fill();
-  fC(x-2,y+6,1.5,'#cc6688');fC(x+2,y+6,1.5,'#cc6688');// nostrils
+  // Head
+  g.fillStyle='#f2a7c3';g.beginPath();g.ellipse(x,y+1,15,14,0,0,6.28);g.fill();
+  // Floppy ears (very distinctive)
+  g.fillStyle='#f2a7c3';
+  g.beginPath();g.ellipse(x-13,y-13,9,11,-.3,0,6.28);g.fill();
+  g.beginPath();g.ellipse(x+13,y-13,9,11,.3,0,6.28);g.fill();
+  g.fillStyle='#e896b8';
+  g.beginPath();g.ellipse(x-13,y-13,5.5,7.5,-.3,0,6.28);g.fill();
+  g.beginPath();g.ellipse(x+13,y-13,5.5,7.5,.3,0,6.28);g.fill();
+  // Eyes
+  fC(x-5,y+1,4,'#fff');fC(x+5,y+1,4,'#fff');
+  fC(x-5,y+1,3,'#3366aa');fC(x+5,y+1,3,'#3366aa');
+  fC(x-5,y+1,1.8,'#111');fC(x+5,y+1,1.8,'#111');
+  fC(x-4,y,1.1,'#fff');fC(x+4,y,1.1,'#fff');
+  // Round pig snout (very prominent)
+  g.fillStyle='#e896b8';g.beginPath();g.ellipse(x,y+7,7,5.5,0,0,6.28);g.fill();
+  fC(x-2.5,y+7,1.8,'#b05070');fC(x+2.5,y+7,1.8,'#b05070');// nostrils
   // Smile
-  g.strokeStyle='#cc6688';g.lineWidth=1.5;
-  g.beginPath();g.arc(x,y+7,4,.1,Math.PI-.1);g.stroke();
+  g.strokeStyle='#b05070';g.lineWidth=1.5;
+  g.beginPath();g.arc(x,y+8,5,.1,Math.PI-.1);g.stroke();
   // Little arms
-  fC(x-16,y+20,5,'#f7b8d0');fC(x+16,y+20,5,'#f7b8d0');
-  // Tiny curly tail
-  g.strokeStyle='#f7b8d0';g.lineWidth=3;
-  g.beginPath();g.arc(x+14,y+30,4,0,Math.PI*1.5);g.stroke();
+  fC(x-16,y+22,5,'#f2a7c3');fC(x+16,y+22,5,'#f2a7c3');
+  // Curly tail
+  g.strokeStyle='#f2a7c3';g.lineWidth=3;g.lineCap='round';
+  g.beginPath();g.arc(x+13,y+32,4,-Math.PI*.5,Math.PI,false);g.stroke();
 }
 
 function drawSylveon(x,y){
-  // Fairy Ribbon Pokemon — cream+pink, red bow, blue eyes, ribbon feelers with hands
-  // Ribbon feelers (drawn first, behind)
-  g.strokeStyle='#ff6699';g.lineWidth=5;g.lineCap='round';
-  g.beginPath();g.moveTo(x-4,y-8);g.bezierCurveTo(x-24,y-4,x-28,y+16,x-22,y+28);g.stroke();
-  g.strokeStyle='#5599ff';g.lineWidth=3;
-  g.beginPath();g.moveTo(x-6,y-6);g.bezierCurveTo(x-20,y,x-22,y+18,x-16,y+30);g.stroke();
-  g.strokeStyle='#ff6699';g.lineWidth=5;
-  g.beginPath();g.moveTo(x+4,y-8);g.bezierCurveTo(x+24,y-4,x+28,y+16,x+22,y+28);g.stroke();
-  g.strokeStyle='#5599ff';g.lineWidth=3;
-  g.beginPath();g.moveTo(x+6,y-6);g.bezierCurveTo(x+20,y,x+22,y+18,x+16,y+30);g.stroke();
-  // Ribbon "paws" at feeler ends
-  fC(x-22,y+28,5,'#fff8f8');fC(x-16,y+30,5,'#ccddff');
-  fC(x+22,y+28,5,'#fff8f8');fC(x+16,y+30,5,'#ccddff');
-  // Body
-  g.fillStyle='#fff8f8';g.beginPath();g.ellipse(x,y+20,13,15,0,0,6.28);g.fill();
-  // Pink paws/feet
-  fC(x-8,y+33,5,'#ffaabb');fC(x+8,y+33,5,'#ffaabb');
-  // Pink belly patch
-  g.fillStyle='#ffddee';g.beginPath();g.ellipse(x,y+22,8,10,0,0,6.28);g.fill();
-  // Red collar with blue gem
-  g.strokeStyle='#cc2244';g.lineWidth=4;
-  g.beginPath();g.arc(x,y+10,9,Math.PI*.15,Math.PI*.85);g.stroke();
-  fC(x,y+12,3,'#4488ff');
+  // Sylveon – Pokémon: ★ cream+pink fairy ribbon Pokemon, ribbon feelers, red bow ★
+  // Ribbon feelers (most iconic — drawn first/behind)
+  g.strokeStyle='#ff9eb5';g.lineWidth=6;g.lineCap='round';
+  g.beginPath();g.moveTo(x-3,y-10);g.bezierCurveTo(x-26,y-6,x-30,y+18,x-24,y+32);g.stroke();
+  g.beginPath();g.moveTo(x+3,y-10);g.bezierCurveTo(x+26,y-6,x+30,y+18,x+24,y+32);g.stroke();
+  g.strokeStyle='#aac4ff';g.lineWidth=3.5;
+  g.beginPath();g.moveTo(x-5,y-8);g.bezierCurveTo(x-22,y,x-24,y+20,x-18,y+34);g.stroke();
+  g.beginPath();g.moveTo(x+5,y-8);g.bezierCurveTo(x+22,y,x+24,y+20,x+18,y+34);g.stroke();
+  // Feeler paw-hands
+  g.fillStyle='#fff8f0';g.beginPath();g.ellipse(x-24,y+32,6,4,-.3,0,6.28);g.fill();
+  g.fillStyle='#aac4ff';g.beginPath();g.ellipse(x-18,y+34,5,3.5,-.2,0,6.28);g.fill();
+  g.fillStyle='#fff8f0';g.beginPath();g.ellipse(x+24,y+32,6,4,.3,0,6.28);g.fill();
+  g.fillStyle='#aac4ff';g.beginPath();g.ellipse(x+18,y+34,5,3.5,.2,0,6.28);g.fill();
+  // Body (cream white)
+  g.fillStyle='#fff8f0';g.beginPath();g.ellipse(x,y+22,12,14,0,0,6.28);g.fill();
+  // Cream belly
+  g.fillStyle='#ffe8f0';g.beginPath();g.ellipse(x,y+24,7,9,0,0,6.28);g.fill();
+  // Pink paws
+  fC(x-8,y+34,5,'#ffb3c6');fC(x+8,y+34,5,'#ffb3c6');
+  // Red collar + blue gem
+  g.strokeStyle='#cc2244';g.lineWidth=4;g.beginPath();g.arc(x,y+11,10,Math.PI*.1,Math.PI*.9);g.stroke();
+  fC(x,y+13,3.5,'#4d8fff');
   // Head
-  g.fillStyle='#fff8f8';g.beginPath();g.ellipse(x,y+2,14,13,0,0,6.28);g.fill();
-  // Cat ears with pink inside
-  g.fillStyle='#fff8f8';
-  g.beginPath();g.moveTo(x-11,y-8);g.lineTo(x-16,y-22);g.lineTo(x-4,y-10);g.closePath();g.fill();
-  g.beginPath();g.moveTo(x+11,y-8);g.lineTo(x+16,y-22);g.lineTo(x+4,y-10);g.closePath();g.fill();
-  g.fillStyle='#ffaabb';
-  g.beginPath();g.moveTo(x-10,y-9);g.lineTo(x-14,y-20);g.lineTo(x-5,y-11);g.closePath();g.fill();
-  g.beginPath();g.moveTo(x+10,y-9);g.lineTo(x+14,y-20);g.lineTo(x+5,y-11);g.closePath();g.fill();
-  // Red bow on head
+  g.fillStyle='#fff8f0';g.beginPath();g.ellipse(x,y+2,14,13,0,0,6.28);g.fill();
+  // Cat ears + pink inner
+  g.fillStyle='#fff8f0';
+  g.beginPath();g.moveTo(x-11,y-9);g.lineTo(x-17,y-24);g.lineTo(x-4,y-11);g.closePath();g.fill();
+  g.beginPath();g.moveTo(x+11,y-9);g.lineTo(x+17,y-24);g.lineTo(x+4,y-11);g.closePath();g.fill();
+  g.fillStyle='#ffb3c6';
+  g.beginPath();g.moveTo(x-10,y-10);g.lineTo(x-14,y-21);g.lineTo(x-5,y-12);g.closePath();g.fill();
+  g.beginPath();g.moveTo(x+10,y-10);g.lineTo(x+14,y-21);g.lineTo(x+5,y-12);g.closePath();g.fill();
+  // ★ ICONIC red+white bow on head ★
   g.fillStyle='#cc2244';
-  g.beginPath();g.moveTo(x,y-12);g.bezierCurveTo(x-10,y-20,x-14,y-12,x,y-12);g.fill();
-  g.beginPath();g.moveTo(x,y-12);g.bezierCurveTo(x+10,y-20,x+14,y-12,x,y-12);g.fill();
-  // Blue inner bow
-  g.fillStyle='#4466ff';
-  g.beginPath();g.moveTo(x-2,y-12);g.bezierCurveTo(x-6,y-17,x-4,y-12,x-2,y-12);g.fill();
-  g.beginPath();g.moveTo(x+2,y-12);g.bezierCurveTo(x+6,y-17,x+4,y-12,x+2,y-12);g.fill();
-  fC(x,y-12,3,'#fff8f8');
-  // Eyes — large teal with long lashes
-  fC(x-5,y+2,4.5,'#fff');fC(x+5,y+2,4.5,'#fff');
-  fC(x-5,y+2,3.5,'#66bbee');fC(x+5,y+2,3.5,'#66bbee');
-  fC(x-5,y+2,2,'#111');fC(x+5,y+2,2,'#111');
-  fC(x-4,y+1,1.2,'#fff');fC(x+4,y+1,1.2,'#fff');
-  // Small pink nose
-  fC(x,y+7,1.8,'#ffaabb');
+  g.beginPath();g.moveTo(x,y-13);g.bezierCurveTo(x-11,y-22,x-15,y-13,x,y-13);g.fill();
+  g.beginPath();g.moveTo(x,y-13);g.bezierCurveTo(x+11,y-22,x+15,y-13,x,y-13);g.fill();
+  fC(x,y-13,4,'#fff8f0');// white bow centre
+  // Blue eyes with lashes
+  fC(x-5,y+3,5,'#fff');fC(x+5,y+3,5,'#fff');
+  fC(x-5,y+3,4,'#72c4e8');fC(x+5,y+3,4,'#72c4e8');
+  fC(x-5,y+3,2.5,'#0d2240');fC(x+5,y+3,2.5,'#0d2240');
+  fC(x-4,y+1.5,1.5,'#fff');fC(x+4,y+1.5,1.5,'#fff');
+  // Lash lines
+  g.strokeStyle='#0d2240';g.lineWidth=1.2;
+  [[-9,y-1,-11,y-4],[-6,y-2,-7,y-5],[-3,y-2,-2,y-5]].forEach(function(l){
+    g.beginPath();g.moveTo(x+l[0],l[1]);g.lineTo(x+l[2],l[3]);g.stroke();
+    g.beginPath();g.moveTo(x-l[0],l[1]);g.lineTo(x-l[2],l[3]);g.stroke();
+  });
+  // Tiny pink nose
+  fC(x,y+7,2,'#ffb3c6');
 }
 
 function drawMew(x,y){
-  // Psychic Pokemon — bubble-round pink, huge teal eyes, long thin tail, tiny paws
-  // Tail (long, thin, curls up behind)
-  g.strokeStyle='#ffaac8';g.lineWidth=5;g.lineCap='round';
-  g.beginPath();g.moveTo(x+12,y+30);g.bezierCurveTo(x+34,y+24,x+36,y+2,x+22,y-10);
-  g.bezierCurveTo(x+14,y-16,x+8,y-12,x+10,y-6);g.stroke();
-  fC(x+10,y-6,5,'#ffaac8');// round tail tip
-  // Round body
-  g.fillStyle='#ffaac8';g.beginPath();g.ellipse(x,y+20,15,14,0,0,6.28);g.fill();
+  // Mew – Pokémon: ★ tiny round pink psychic, HUGE teal eyes, long curling tail ★
+  // Long curling tail (very distinctive)
+  g.strokeStyle='#f4a0bc';g.lineWidth=6;g.lineCap='round';
+  g.beginPath();g.moveTo(x+12,y+32);
+  g.bezierCurveTo(x+38,y+24,x+40,y+4,x+24,y-8);
+  g.bezierCurveTo(x+14,y-16,x+6,y-10,x+10,y-4);g.stroke();
+  fC(x+10,y-4,5.5,'#f4a0bc');// round tail tip
+  // Perfectly round body
+  g.fillStyle='#f4a0bc';g.beginPath();g.arc(x,y+20,16,0,6.28);g.fill();
   // Lighter belly
-  g.fillStyle='#ffccdd';g.beginPath();g.ellipse(x-1,y+22,9,9,0,0,6.28);g.fill();
-  // Tiny arms
-  fC(x-14,y+18,5,'#ffaac8');fC(x+14,y+18,5,'#ffaac8');
-  // Tiny feet
-  fC(x-7,y+33,5,'#ffaac8');fC(x+7,y+33,5,'#ffaac8');
-  // Round head
-  g.fillStyle='#ffaac8';g.beginPath();g.ellipse(x,y+4,16,15,0,0,6.28);g.fill();
-  // Small triangular ears
-  g.fillStyle='#ff88aa';
-  g.beginPath();g.moveTo(x-12,y-4);g.lineTo(x-16,y-18);g.lineTo(x-4,y-8);g.closePath();g.fill();
-  g.beginPath();g.moveTo(x+12,y-4);g.lineTo(x+16,y-18);g.lineTo(x+4,y-8);g.closePath();g.fill();
-  g.fillStyle='#ffaac8';g.beginPath();g.ellipse(x,y+4,14,13,0,0,6.28);g.fill();
-  // HUGE teal eyes
-  fC(x-6,y+3,6,'#fff');fC(x+6,y+3,6,'#fff');
-  fC(x-6,y+3,5,'#55cccc');fC(x+6,y+3,5,'#55cccc');
-  fC(x-6,y+3,3,'#111');fC(x+6,y+3,3,'#111');
-  fC(x-4.5,y+1.5,1.8,'#fff');fC(x+4.5,y+1.5,1.8,'#fff');// sparkles
-  // Tiny nose + cute smile
+  g.fillStyle='#ffc8dc';g.beginPath();g.ellipse(x-2,y+22,9,10,0,0,6.28);g.fill();
+  // Tiny arms (nub-like)
+  g.fillStyle='#f4a0bc';
+  g.beginPath();g.ellipse(x-15,y+18,6,5,-.4,0,6.28);g.fill();
+  g.beginPath();g.ellipse(x+15,y+18,6,5,.4,0,6.28);g.fill();
+  // Tiny legs
+  fC(x-7,y+35,5,'#f4a0bc');fC(x+7,y+35,5,'#f4a0bc');
+  // Round head (baby proportions)
+  g.fillStyle='#f4a0bc';g.beginPath();g.arc(x,y+4,17,0,6.28);g.fill();
+  // Tiny triangular ears
+  g.fillStyle='#ee88aa';
+  g.beginPath();g.moveTo(x-13,y-6);g.lineTo(x-17,y-20);g.lineTo(x-5,y-9);g.closePath();g.fill();
+  g.beginPath();g.moveTo(x+13,y-6);g.lineTo(x+17,y-20);g.lineTo(x+5,y-9);g.closePath();g.fill();
+  // Face re-draw over ears
+  g.fillStyle='#f4a0bc';g.beginPath();g.arc(x,y+4,15,0,6.28);g.fill();
+  // ★ ICONIC: enormous teal oval eyes ★
+  g.fillStyle='#fff';g.beginPath();g.ellipse(x-6,y+3,7,8,0,0,6.28);g.fill();
+  g.fillStyle='#fff';g.beginPath();g.ellipse(x+6,y+3,7,8,0,0,6.28);g.fill();
+  g.fillStyle='#4dd0e1';g.beginPath();g.ellipse(x-6,y+3,5.5,6.5,0,0,6.28);g.fill();
+  g.fillStyle='#4dd0e1';g.beginPath();g.ellipse(x+6,y+3,5.5,6.5,0,0,6.28);g.fill();
+  fC(x-6,y+3,3.5,'#0a1a20');fC(x+6,y+3,3.5,'#0a1a20');
+  fC(x-4,y,2,'#fff');fC(x+4,y,2,'#fff');// sparkle
+  fC(x-7,y+5,1,'#fff');fC(x+7,y+5,1,'#fff');
+  // Tiny nose + smile
   fC(x,y+10,1.8,'#ee88aa');
   g.strokeStyle='#ee88aa';g.lineWidth=1.5;
-  g.beginPath();g.arc(x,y+11,3,.1,Math.PI-.1);g.stroke();
+  g.beginPath();g.arc(x,y+12,3,.1,Math.PI-.1);g.stroke();
 }
 
 function drawFlora(x,y){
-  // Winx Club — flowing auburn hair, flower crown, green+pink fairy dress, wings
-  // Fairy wings (behind everything)
-  g.globalAlpha=.5;g.fillStyle='#ccffdd';
-  g.beginPath();g.moveTo(x,y+12);g.bezierCurveTo(x-30,y-2,x-36,y-22,x-20,y-26);
-  g.bezierCurveTo(x-8,y-28,x-2,y-4,x,y+12);g.closePath();g.fill();
-  g.beginPath();g.moveTo(x,y+12);g.bezierCurveTo(x+30,y-2,x+36,y-22,x+20,y-26);
-  g.bezierCurveTo(x+8,y-28,x+2,y-4,x,y+12);g.closePath();g.fill();
-  // Lower wing petals
-  g.fillStyle='#aaffcc';
-  g.beginPath();g.moveTo(x,y+14);g.bezierCurveTo(x-22,y+14,x-24,y+32,x-14,y+34);
-  g.bezierCurveTo(x-6,y+36,x-2,y+22,x,y+14);g.closePath();g.fill();
-  g.beginPath();g.moveTo(x,y+14);g.bezierCurveTo(x+22,y+14,x+24,y+32,x+14,y+34);
-  g.bezierCurveTo(x+6,y+36,x+2,y+22,x,y+14);g.closePath();g.fill();
-  g.globalAlpha=1;
-  // Dress — pink and green
-  g.fillStyle='#66cc66';g.fillRect(x-7,y+10,14,14);// green corset
-  g.fillStyle='#ff99cc';
-  g.beginPath();g.moveTo(x-8,y+20);g.lineTo(x-22,y+44);g.lineTo(x+22,y+44);g.lineTo(x+8,y+20);g.closePath();g.fill();
-  // Long reddish-auburn hair
-  g.fillStyle='#cc4422';
-  g.beginPath();g.ellipse(x,y-6,16,18,0,0,6.28);g.fill();// top hair
-  g.beginPath();g.moveTo(x-14,y+6);g.bezierCurveTo(x-24,y+20,x-22,y+40,x-14,y+46);
-  g.lineTo(x-10,y+46);g.bezierCurveTo(x-16,y+38,x-16,y+20,x-8,y+8);g.closePath();g.fill();
-  g.beginPath();g.moveTo(x+14,y+6);g.bezierCurveTo(x+24,y+20,x+22,y+40,x+14,y+46);
-  g.lineTo(x+10,y+46);g.bezierCurveTo(x+16,y+38,x+16,y+20,x+8,y+8);g.closePath();g.fill();
+  // Flora – Winx Club: ★ long auburn hair, FLOWER in hair, green+pink fairy, butterfly wings ★
+  // Butterfly fairy wings (behind everything)
+  g.save();g.globalAlpha=.55;
+  g.fillStyle='#b8ffcc';
+  g.beginPath();g.moveTo(x,y+12);g.bezierCurveTo(x-32,y-2,x-38,y-28,x-20,y-32);
+  g.bezierCurveTo(x-8,y-34,x-2,y-4,x,y+12);g.closePath();g.fill();
+  g.beginPath();g.moveTo(x,y+12);g.bezierCurveTo(x+32,y-2,x+38,y-28,x+20,y-32);
+  g.bezierCurveTo(x+8,y-34,x+2,y-4,x,y+12);g.closePath();g.fill();
+  g.fillStyle='#88ffb0';
+  g.beginPath();g.moveTo(x,y+14);g.bezierCurveTo(x-24,y+14,x-28,y+38,x-16,y+42);
+  g.bezierCurveTo(x-8,y+44,x-2,y+26,x,y+14);g.closePath();g.fill();
+  g.beginPath();g.moveTo(x,y+14);g.bezierCurveTo(x+24,y+14,x+28,y+38,x+16,y+42);
+  g.bezierCurveTo(x+8,y+44,x+2,y+26,x,y+14);g.closePath();g.fill();
+  // Wing veins
+  g.strokeStyle='rgba(100,220,140,.5)';g.lineWidth=1;
+  g.beginPath();g.moveTo(x,y+12);g.lineTo(x-20,y-20);g.stroke();
+  g.beginPath();g.moveTo(x,y+12);g.lineTo(x+20,y-20);g.stroke();
+  g.restore();
+  // Green corset top
+  g.fillStyle='#5bba6f';g.fillRect(x-8,y+10,16,16);
+  // Pink flowing skirt
+  g.fillStyle='#ff88bb';
+  g.beginPath();g.moveTo(x-9,y+22);g.lineTo(x-24,y+48);g.lineTo(x+24,y+48);g.lineTo(x+9,y+22);g.closePath();g.fill();
+  g.fillStyle='#ffaaca';
+  g.beginPath();g.moveTo(x-6,y+22);g.lineTo(x-14,y+48);g.lineTo(x+14,y+48);g.lineTo(x+6,y+22);g.closePath();g.fill();
+  // Long reddish-auburn flowing hair
+  g.fillStyle='#b84c2c';
+  g.beginPath();g.ellipse(x,y-4,16,18,0,0,6.28);g.fill();// top
+  g.beginPath();g.moveTo(x-14,y+8);g.bezierCurveTo(x-26,y+24,x-24,y+44,x-12,y+48);
+  g.lineTo(x-8,y+48);g.bezierCurveTo(x-18,y+42,x-18,y+22,x-8,y+10);g.closePath();g.fill();
+  g.beginPath();g.moveTo(x+14,y+8);g.bezierCurveTo(x+26,y+24,x+24,y+44,x+12,y+48);
+  g.lineTo(x+8,y+48);g.bezierCurveTo(x+18,y+42,x+18,y+22,x+8,y+10);g.closePath();g.fill();
   // Face
-  fC(x,y,12,'#fde0d0');
-  // Flower crown
-  var fc=[[x-8,y-18],[x,y-22],[x+8,y-18],[x-4,y-20],[x+4,y-20]];
-  fc.forEach(function(p){
-    fC(p[0],p[1],4,'#ff88cc');fC(p[0],p[1],2,'#ffee44');
-  });
-  // Eyes + brows
-  g.strokeStyle='#884422';g.lineWidth=1.5;
-  g.beginPath();g.moveTo(x-8,y-4);g.quadraticCurveTo(x-5,y-7,x-2,y-5);g.stroke();
-  g.beginPath();g.moveTo(x+8,y-4);g.quadraticCurveTo(x+5,y-7,x+2,y-5);g.stroke();
-  fC(x-5,y+1,3.5,'#fff');fC(x+5,y+1,3.5,'#fff');
-  fC(x-5,y+1,2.5,'#66bb44');fC(x+5,y+1,2.5,'#66bb44');// green eyes
-  fC(x-5,y+1,1.5,'#222');fC(x+5,y+1,1.5,'#222');
-  fC(x,y+5,2,'#ee9988');
-  g.strokeStyle='#cc7766';g.lineWidth=1.2;
-  g.beginPath();g.arc(x,y+7,3,.15,Math.PI-.15);g.stroke();
+  fC(x,y+2,12,'#fde0d0');
+  // ★ ICONIC: flower in hair ★
+  for(var fi=0;fi<5;fi++){
+    var fa=fi*1.257;
+    fC(x-13+Math.cos(fa)*5,y-16+Math.sin(fa)*5,4,'#ff88cc');
+  }
+  fC(x-13,y-16,3,'#ffee44');// flower centre
+  // Eyebrows
+  g.strokeStyle='#7a3010';g.lineWidth=1.5;
+  g.beginPath();g.moveTo(x-9,y-4);g.quadraticCurveTo(x-5,y-8,x-1,y-5);g.stroke();
+  g.beginPath();g.moveTo(x+9,y-4);g.quadraticCurveTo(x+5,y-8,x+1,y-5);g.stroke();
+  // Green eyes
+  fC(x-5,y+2,4,'#fff');fC(x+5,y+2,4,'#fff');
+  fC(x-5,y+2,3,'#5aaa3c');fC(x+5,y+2,3,'#5aaa3c');
+  fC(x-5,y+2,1.8,'#222');fC(x+5,y+2,1.8,'#222');
+  fC(x-4,y+1,1.1,'#fff');fC(x+4,y+1,1.1,'#fff');
+  // Pink lips
+  fC(x,y+8,3,'#ee9988');
 }
 
 function drawGlinda(x,y){
-  // Wicked Glinda — massive blonde hair, sparkly bubble-gum pink gown, tiara, star wand
-  // Big sparkly gown
-  var ggrd=g.createRadialGradient(x,y+46,4,x,y+46,36);
-  ggrd.addColorStop(0,'#ffccee');ggrd.addColorStop(.6,'#ff88cc');ggrd.addColorStop(1,'#cc4499');
-  g.fillStyle=ggrd;
-  g.beginPath();g.moveTo(x-8,y+12);g.bezierCurveTo(x-36,y+22,x-44,y+56,x-26,y+62);
-  g.lineTo(x+26,y+62);g.bezierCurveTo(x+44,y+56,x+36,y+22,x+8,y+12);g.closePath();g.fill();
-  // Gown glitter dots
-  g.fillStyle='rgba(255,255,255,.7)';
-  [[x-18,y+28],[x+14,y+32],[x-8,y+44],[x+22,y+44],[x-24,y+50],[x+6,y+54]].forEach(function(p){
-    fC(p[0],p[1],1.5,'#fff');
+  // Glinda – Wicked: ★ GIANT curly blonde bouffant, sparkly pink gown, star wand ★
+  // Massive sparkly pink gown
+  g.fillStyle='#f48fb1';
+  g.beginPath();g.moveTo(x-8,y+12);
+  g.bezierCurveTo(x-40,y+22,x-48,y+62,x-28,y+68);
+  g.lineTo(x+28,y+68);
+  g.bezierCurveTo(x+48,y+62,x+40,y+22,x+8,y+12);g.closePath();g.fill();
+  // Gown shine
+  g.fillStyle='#ffb3cc';
+  g.beginPath();g.moveTo(x-6,y+12);
+  g.bezierCurveTo(x-22,y+22,x-20,y+54,x-10,y+62);
+  g.lineTo(x+10,y+62);
+  g.bezierCurveTo(x+20,y+54,x+22,y+22,x+6,y+12);g.closePath();g.fill();
+  // Ruffle layers
+  g.strokeStyle='#e040a0';g.lineWidth=2;
+  g.beginPath();g.moveTo(x-42,y+44);g.quadraticCurveTo(x,y+36,x+42,y+44);g.stroke();
+  g.beginPath();g.moveTo(x-46,y+58);g.quadraticCurveTo(x,y+50,x+46,y+58);g.stroke();
+  // Glitter dots on gown
+  [[x-20,y+28],[x+18,y+32],[x-8,y+46],[x+22,y+48],[x-28,y+52],[x+4,y+56]].forEach(function(p){
+    fC(p[0],p[1],1.8,'rgba(255,255,255,.8)');
   });
-  // Gown ruffles
-  g.strokeStyle='#ffaadd';g.lineWidth=2;
-  g.beginPath();g.moveTo(x-38,y+42);g.quadraticCurveTo(x,y+34,x+38,y+42);g.stroke();
-  g.beginPath();g.moveTo(x-44,y+54);g.quadraticCurveTo(x,y+46,x+44,y+54);g.stroke();
-  // Bodice / gloves
-  g.fillStyle='#ff66aa';g.fillRect(x-8,y+8,16,14);
-  // Massive curly blonde hair
-  g.fillStyle='#ffe040';
-  [[x-18,y-2,11,15,.4],[x+18,y-2,11,15,-.4],[x-22,y+10,8,12,.5],[x+22,y+10,8,12,-.5],
-   [x-10,y-14,9,12,.2],[x+10,y-14,9,12,-.2],[x-4,y-18,8,10,0],[x+4,y-18,8,10,0]].forEach(function(e2){
-    g.beginPath();g.ellipse(x+e2[0]-x,e2[1],e2[2],e2[3],e2[4],0,6.28);g.fill();
+  // White bodice
+  g.fillStyle='#fff0f8';g.beginPath();g.roundRect(x-8,y+8,16,14,4);g.fill();
+  // ★ ICONIC: ENORMOUS curly blonde bouffant ★
+  g.fillStyle='#ffd740';
+  [[x-18,y-2,11,14,.4],[x+18,y-2,11,14,-.4],
+   [x-22,y+10,8,12,.55],[x+22,y+10,8,12,-.55],
+   [x-12,y-14,10,13,.2],[x+12,y-14,10,13,-.2],
+   [x-2,y-20,10,12,0],[x+2,y-20,10,12,0],
+   [x-20,y+0,7,10,.6],[x+20,y+0,7,10,-.6]].forEach(function(e2){
+    g.beginPath();g.ellipse(e2[0],e2[1],e2[2],e2[3],e2[4],0,6.28);g.fill();
   });
   // Face
-  fC(x,y+2,12,'#fde0c0');
-  // Tiara with gems
+  fC(x,y+3,12,'#fde0c0');
+  // Tiara with 3 gems
   g.strokeStyle='#ffd700';g.lineWidth=2.5;
-  g.beginPath();g.moveTo(x-14,y-20);g.lineTo(x-14,y-30);g.lineTo(x-6,y-26);
-  g.lineTo(x,y-34);g.lineTo(x+6,y-26);g.lineTo(x+14,y-30);g.lineTo(x+14,y-20);g.stroke();
-  fC(x,y-34,3.5,'#ff88ff');fC(x-14,y-30,2.5,'#88ccff');fC(x+14,y-30,2.5,'#88ccff');
-  // Eyes (big, sparkly)
-  fC(x-4,y+1,4,'#fff');fC(x+4,y+1,4,'#fff');
-  fC(x-4,y+1,3,'#66aabb');fC(x+4,y+1,3,'#66aabb');
-  fC(x-4,y+1,1.8,'#111');fC(x+4,y+1,1.8,'#111');
-  fC(x-3,y,1.2,'#fff');fC(x+3,y,1.2,'#fff');
-  // Lips
-  g.fillStyle='#ee4488';
-  g.beginPath();g.moveTo(x-4,y+7);g.quadraticCurveTo(x,y+5.5,x+4,y+7);
-  g.quadraticCurveTo(x,y+10,x-4,y+7);g.closePath();g.fill();
-  // Star wand (right hand)
-  g.strokeStyle='#ffd700';g.lineWidth=2;
-  g.beginPath();g.moveTo(x+8,y+10);g.lineTo(x+26,y-10);g.stroke();
-  // Five-point star at tip
+  g.beginPath();g.moveTo(x-14,y-22);g.lineTo(x-14,y-32);g.lineTo(x-5,y-27);
+  g.lineTo(x,y-36);g.lineTo(x+5,y-27);g.lineTo(x+14,y-32);g.lineTo(x+14,y-22);g.stroke();
+  fC(x,y-36,3.5,'#ff44ff');fC(x-14,y-32,2.5,'#88ccff');fC(x+14,y-32,2.5,'#88ccff');
+  // Eyes + lashes
+  fC(x-4,y+2,4.5,'#fff');fC(x+4,y+2,4.5,'#fff');
+  fC(x-4,y+2,3.5,'#66aacc');fC(x+4,y+2,3.5,'#66aacc');
+  fC(x-4,y+2,2,'#111');fC(x+4,y+2,2,'#111');
+  fC(x-3,y+1,1.2,'#fff');fC(x+3,y+1,1.2,'#fff');
+  // Pink lips
+  g.fillStyle='#e82070';
+  g.beginPath();g.moveTo(x-4,y+8);g.quadraticCurveTo(x,y+6,x+4,y+8);
+  g.quadraticCurveTo(x,y+12,x-4,y+8);g.closePath();g.fill();
+  // ★ ICONIC: star wand ★
+  g.strokeStyle='#ffd700';g.lineWidth=2.5;
+  g.beginPath();g.moveTo(x+8,y+10);g.lineTo(x+28,y-14);g.stroke();
+  // 5-point star tip
   g.fillStyle='#ffd700';
-  var sa=[];for(var si=0;si<5;si++){
-    var ang=si/5*Math.PI*2-Math.PI/2;
-    sa.push([x+26+Math.cos(ang)*8,y-10+Math.sin(ang)*8]);
-    sa.push([x+26+Math.cos(ang+Math.PI/5)*3.5,y-10+Math.sin(ang+Math.PI/5)*3.5]);
+  var sp=[];
+  for(var si=0;si<10;si++){
+    var sa2=si/10*Math.PI*2-Math.PI/2;
+    var sr=si%2===0?9:4;
+    sp.push([x+28+Math.cos(sa2)*sr,y-14+Math.sin(sa2)*sr]);
   }
-  g.beginPath();sa.forEach(function(p,i){i===0?g.moveTo(p[0],p[1]):g.lineTo(p[0],p[1]);});
+  g.beginPath();sp.forEach(function(p,i){i===0?g.moveTo(p[0],p[1]):g.lineTo(p[0],p[1]);});
   g.closePath();g.fill();
-  fC(x+26,y-10,3,'#fff');
+  fC(x+28,y-14,3,'#fff');// star gleam
 }
 
 function drawBlossom(x,y){
-  // Powerpuff Girls — huge round head, big oval eyes, auburn hair, RED bow headband, pink dress
-  // Long auburn hair behind head
-  g.fillStyle='#882200';
-  g.beginPath();g.moveTo(x-16,y+2);g.bezierCurveTo(x-20,y+20,x-18,y+44,x-8,y+50);
-  g.lineTo(x+8,y+50);g.bezierCurveTo(x+18,y+44,x+20,y+20,x+16,y+2);g.closePath();g.fill();
-  // PPG-style huge perfectly round head
-  g.fillStyle='#fde8c8';g.beginPath();g.arc(x,y,22,0,6.28);g.fill();
-  // Body — pink dress with black stripe
+  // Blossom – Powerpuff Girls: ★ giant round head, huge eyes, RED bow, long auburn hair ★
+  // Long auburn hair behind
+  g.fillStyle='#8b3a10';
+  g.beginPath();g.moveTo(x-18,y+2);
+  g.bezierCurveTo(x-22,y+24,x-20,y+50,x-8,y+56);
+  g.lineTo(x+8,y+56);
+  g.bezierCurveTo(x+20,y+50,x+22,y+24,x+18,y+2);g.closePath();g.fill();
+  // ★ ICONIC: perfectly round PPG head ★
+  g.fillStyle='#fde8c8';g.beginPath();g.arc(x,y+2,23,0,6.28);g.fill();
+  // Pink dress body
   g.fillStyle='#ff88cc';
-  g.beginPath();g.moveTo(x-12,y+21);g.lineTo(x-14,y+44);g.lineTo(x+14,y+44);g.lineTo(x+12,y+21);g.closePath();g.fill();
-  g.fillStyle='#111';g.fillRect(x-12,y+33,24,4);// black belt stripe
-  // Big oval eyes (PPG signature)
-  fC(x-8,y+2,8,'#fff');fC(x+8,y+2,8,'#fff');
-  fC(x-8,y+2,6,'#ee44aa');fC(x+8,y+2,6,'#ee44aa');// pink irises
-  fC(x-8,y+2,4,'#111');fC(x+8,y+2,4,'#111');
-  fC(x-6,y,2.5,'#fff');fC(x+6,y,2.5,'#fff');// sparkle
-  // Simple line mouth (PPG style)
-  g.strokeStyle='#cc7744';g.lineWidth=2;
-  g.beginPath();g.arc(x,y+12,6,.05,Math.PI-.05);g.stroke();
-  // Red bow headband (Blossom's most iconic feature)
-  g.fillStyle='#cc1122';
-  g.beginPath();g.moveTo(x-2,y-20);g.bezierCurveTo(x-16,y-30,x-20,y-18,x-2,y-20);g.fill();
-  g.beginPath();g.moveTo(x+2,y-20);g.bezierCurveTo(x+16,y-30,x+20,y-18,x+2,y-20);g.fill();
-  fC(x,y-20,4.5,'#ee3344');
-  // Heart clip on bow
-  fC(x,y-20,2.5,'#fff');
-  // Hair visible at sides
-  g.fillStyle='#882200';
-  g.beginPath();g.ellipse(x-20,y+6,5,12,.2,0,6.28);g.fill();
-  g.beginPath();g.ellipse(x+20,y+6,5,12,-.2,0,6.28);g.fill();
-  // Little arms
-  fC(x-16,y+26,5,'#fde8c8');fC(x+16,y+26,5,'#fde8c8');
+  g.beginPath();g.moveTo(x-12,y+24);g.lineTo(x-15,y+50);g.lineTo(x+15,y+50);g.lineTo(x+12,y+24);g.closePath();g.fill();
+  // Black belt stripe
+  g.fillStyle='#111';g.fillRect(x-13,y+36,26,5);
+  // White collar
+  g.fillStyle='#fff';g.beginPath();g.moveTo(x-10,y+22);g.lineTo(x-6,y+30);g.lineTo(x+6,y+30);g.lineTo(x+10,y+22);g.closePath();g.fill();
+  // ★ ICONIC: giant oval PPG eyes ★
+  g.fillStyle='#fff';g.beginPath();g.ellipse(x-8,y+4,9,10,0,0,6.28);g.fill();
+  g.fillStyle='#fff';g.beginPath();g.ellipse(x+8,y+4,9,10,0,0,6.28);g.fill();
+  g.fillStyle='#ff66aa';g.beginPath();g.ellipse(x-8,y+4,7,8,0,0,6.28);g.fill();
+  g.fillStyle='#ff66aa';g.beginPath();g.ellipse(x+8,y+4,7,8,0,0,6.28);g.fill();
+  g.fillStyle='#111';g.beginPath();g.ellipse(x-8,y+4,4.5,5.5,0,0,6.28);g.fill();
+  g.fillStyle='#111';g.beginPath();g.ellipse(x+8,y+4,4.5,5.5,0,0,6.28);g.fill();
+  fC(x-5.5,y+1,2.5,'#fff');fC(x+5.5,y+1,2.5,'#fff');// sparkle
+  // PPG line mouth
+  g.strokeStyle='#c07850';g.lineWidth=2;
+  g.beginPath();g.arc(x,y+14,6,.05,Math.PI-.05);g.stroke();
+  // Hair sides visible
+  g.fillStyle='#8b3a10';
+  g.beginPath();g.ellipse(x-22,y+6,5,12,.2,0,6.28);g.fill();
+  g.beginPath();g.ellipse(x+22,y+6,5,12,-.2,0,6.28);g.fill();
+  // ★ ICONIC: RED bow headband ★
+  g.fillStyle='#cc0011';
+  g.beginPath();g.moveTo(x-2,y-20);g.bezierCurveTo(x-14,y-30,x-18,y-18,x-2,y-20);g.fill();
+  g.beginPath();g.moveTo(x+2,y-20);g.bezierCurveTo(x+14,y-30,x+18,y-18,x+2,y-20);g.fill();
+  fC(x,y-20,4.5,'#ee1122');// bow knot
+  fC(x,y-20,2,'#fff');// heart detail
+  // Arms
+  fC(x-18,y+30,5,'#fde8c8');fC(x+18,y+30,5,'#fde8c8');
 }
 
 // ── CHARACTER SECTIONS ────────────────────────────────────────
